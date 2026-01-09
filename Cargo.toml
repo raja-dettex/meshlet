@@ -1,0 +1,12 @@
+[package]
+name = "meshlet"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "meshlet"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1.0.100"
+tokio = { version = "1.49.0", features = ["full"] }
