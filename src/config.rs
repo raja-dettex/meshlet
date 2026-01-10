@@ -15,4 +15,4 @@ impl Config {
             upstream_addr
         })
     }
-}
+}   
