@@ -1,0 +1,17 @@
+name: "my-local-proxy"
+listener_addr: "0.0.0.0:10000"
+routes:
+  - prefix: "/welcome"
+    cluster:
+      name: "welcome-route"
+      endpoints: 
+        - "127.0.0.1:8080"
+        - "127.0.0.1:8081"
+  - prefix: "/hello"
+    cluster: 
+      name: "hello-cluster"
+      endpoints:
+        - "127.0.0.1:9090"
+tcp_hosts:
+  - "127.0.0.1:8080"
+  - "127.0.0.1:9090"

@@ -11,4 +11,6 @@ path = "src/main.rs"
 anyhow = "1.0.100"
 http = "1.4.0"
 hyper =  { version = "0.14", features = ["client", "http1", "server", "tcp"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_yml = "0.0.12"
 tokio = { version = "1.49.0", features = ["full"] }
