@@ -5,12 +5,12 @@ use hyper::{Body, Error, Request, Response};
 use crate::http::client::HttpUpstream;
 
 #[derive(Debug, Clone)]
-pub struct Upstream { 
+pub struct Endpoint { 
     upstream : HttpUpstream
 }
 
-impl Upstream { 
-    pub fn new(addr: SocketAddr) -> Upstream { 
+impl Endpoint { 
+    pub fn new(addr: SocketAddr) -> Self { 
         let upstream = HttpUpstream::new(addr);
         Self { 
             upstream
