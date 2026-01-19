@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use hyper::{Body, Request};
 
-use crate::cluster::Cluster;
+use crate::{cluster::Cluster, http::parser::HttpRequest};
 
 #[derive(Debug)]
 pub struct Router { 
@@ -25,6 +25,17 @@ impl Router {
 
     pub fn route(&self, req: &Request<Body>) -> Arc<Cluster>{
         let path = req.uri().path();
+        for route in &self.routes { 
+            if path.starts_with(&route.prefix) { 
+                return route.cluster.clone();
+            }
+        }
+        // fallback to default cluster
+        self.routes[0].cluster.clone()
+    }
+
+    pub fn route_http(&self, req: &HttpRequest) -> Arc<Cluster> { 
+        let path = req.path.clone();
         for route in &self.routes { 
             if path.starts_with(&route.prefix) { 
                 return route.cluster.clone();
