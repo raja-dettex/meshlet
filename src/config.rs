@@ -2,25 +2,28 @@ use std::{fs::File, io::{Read}, net::SocketAddr, path::PathBuf};
 
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct ProxyConfig { 
     pub name: String,
     pub listener_addr: String,
+    pub init_lazy_pooling: bool,
+    pub loadbalancer: String,
     pub routes: Vec<RouterConfig>,
     pub tcp_hosts: Vec<String>
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct RouterConfig { 
     pub prefix: String, 
     pub cluster: ClusterConfig
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct ClusterConfig { 
     pub name: String,
     pub endpoints: Vec<String>
 }
+
 
 impl ProxyConfig { 
     pub fn from_yml(path: PathBuf) -> std::io::Result<Self> { 

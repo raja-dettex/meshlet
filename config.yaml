@@ -1,5 +1,7 @@
 name: "my-local-proxy"
 listener_addr: "0.0.0.0:10000"
+init_lazy_pooling: true
+loadbalancer: "Round_Robin"
 routes:
   - prefix: "/welcome"
     cluster:
